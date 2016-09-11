@@ -1,0 +1,72 @@
+{
+  "name": "angular-credit-cards",
+  "version": "3.1.4",
+  "description": "Angular directives for formatting and validating credit card inputs",
+  "main": "./src",
+  "scripts": {
+    "test": "standard && zuul --phantom -- test/*.js",
+    "umd": "browserify -e . -s angularCreditCards -t [exposify --expose [ --angular=angular ] ] -p derequire/plugin > ./release/angular-credit-cards.js",
+    "preversion": "npm run umd && git add -A ./release/* && git commit -m 'UMD Build'"
+  },
+ "express": "*", 
+   "repository": {
+    "type": "git",
+    "url": "https://github.com/manabshy/angular-credit-cards.git"
+  },
+  "keywords": [
+    "angular",
+    "credit",
+    "card",
+    "payments",
+    "validation",
+    "directive",
+    "form"
+  ],
+  "author": "Manoj Bisht <manabshy@gmail.com> (http://www.chatresh.co.uk/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/manabshy/angular-credit-cards.git/issues"
+  },
+  "homepage": "https://github.com/manabshy/angular-credit-cards.git",
+  "devDependencies": {
+    "angular": "~1.5.0",
+    "angular-mocks": "~1.5.0",
+    "brfs": "^1.4.0",
+    "browserify": "^13.0.0",
+    "chai": "^3.0.0",
+    "derequire": "^2.0.0",
+    "exposify": "^0.5.0",
+    "phantomjs-prebuilt": "~2.1.4",
+    "sinon": "^1.15.3",
+    "sinon-chai": "^2.8.0",
+    "standard": "^8.0.0",
+    "zuul": "defunctzombie/zuul#075444eb80c4e961341ad9c2e8f7a267fbd7d211",
+    "grunt": "~0.4.1",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-compass": "~0.3.0",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-github-pages": "0.0.3",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-concurrent": "~0.4.1",
+    "grunt-nodemon": "^0.4.0"
+  },
+  "dependencies": {
+    "ap": "~0.2.0",
+    "cast-array": "~1.0.1",
+    "creditcards": "~2.1.0",
+    "function-bind": "~1.1.0"
+  },
+  "peerDependencies": {
+    "angular": ">=1.3 <1.6"
+  },
+  "files": [
+    "src/*.js",
+    "readme.md"
+  ],
+  "standard": {
+    "ignore": [
+      "release/"
+    ]
+  }
+}

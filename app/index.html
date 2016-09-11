@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link data-require="bootstrap-css@*" data-semver="3.3.1" rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link data-require="fontsawesome-css@*" data-semver="4.6.3" rel="stylesheet" href="/css/font-awesome-4.6.3/css/font-awesome.min.css" />
+
+    <script data-require="angular.js@*" data-semver="1.3.7" src="/scripts/library/angular-1.3.9/angular.js"></script>
+    <script data-require="angular-credit-cards@*" data-semver="3.0.1" src="/scripts/angular-credit-cards.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/scripts/app.js"></script>
+    
+  </head>
+
+  <body ng-app="ccDemoApp">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-offset-4 col-sm-6">
+          <h3>
+           Enter Card Details
+          </h3>
+        </div>  
+      </div>
+
+      <form name="ccForm" id="ccForm" ng-submit="submitForm(ccForm.$valid)" novalidate>
+        <div class="form-group">
+          <div class="row">
+              <div class="col-sm-offset-4 col-sm-3">    
+                  <label for="card-number">Card Number</label>
+              </div>       
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-4 col-sm-3"> 
+              <input type="text" class="form-control"  cc-number cc-eager-type cc-format name="ccNumber" ng-model="card.number">
+            </div>  
+            <div class="col-sm-1" ng-show="!ccForm.ccNumber.$valid">  
+                 <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red"></span>
+            </div>
+            <div class="col-sm-4" ng-show="ccForm.ccNumber.$ccEagerType && ccForm.ccNumber.$ccType && !ccForm.ccNumber.$pristine">  
+                 <span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green"></span>
+                 <i class="fa fa-cc-visa fa-2x" ng-show="ccForm.ccNumber.$ccEagerType == 'Visa'" aria-hidden="true"></i>
+                 <i class="fa fa-cc-mastercard fa-2x" ng-show="ccForm.ccNumber.$ccEagerType == 'MasterCard'" aria-hidden="true"></i>
+                 <i class="fa fa-cc-amex fa-2x" ng-show="ccForm.ccNumber.$ccEagerType == 'American Express'" aria-hidden="true"></i>
+
+                 <span><strong>{{ccForm.ccNumber.$ccEagerType}}</strong></span>
+            </div>            
+          </div>
+        </div>
+
+        <div class="row" style="display:none">  
+          <div class=" col-sm-offset-4 col-sm-3">      
+            <table class="table" ng-show="ccForm.ccNumber.$ccEagerType && ccForm.ccNumber.$ccType">
+              <thead>
+                <tr>
+                  <th>Valid</th>
+                  <th>Eager Type</th>
+                  <th>Type</th>
+                </tr>            
+              </thead>
+              <tr>
+                <td>
+                  {{ccForm.ccNumber.$valid | yesNo}}
+                </td>
+                <td>
+                  {{ccForm.ccNumber.$ccEagerType || 'Unknown'}}
+                </td>
+                <td>
+                  {{ccForm.ccNumber.$ccType || 'Unknown'}}
+                </td>
+              </tr>
+            </table>
+          </div>  
+        </div>  
+        <div class="form-group">
+          <div class="row">
+              <div class="col-sm-offset-4 col-sm-1">    
+                  <label for="CVC"> CVC</label>    
+              </div>       
+          </div>       
+          <div class="row">  
+            <div class="col-sm-offset-4 col-sm-1">                  
+              <input type="text" class="form-control" id="cvc" cc-cvc cc-type="ccForm.ccNumber.$ccType" name="ccCvc" ng-model="card.cvc">
+            </div>
+            <div class="col-sm-1" ng-show="!ccForm.ccCvc.$valid">  
+                 <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red"></span>
+            </div>
+            <div class="col-sm-1" ng-show="ccForm.ccCvc.$valid && !ccForm.ccCvc.$pristine">  
+                 <span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green"></span>
+            </div>
+          </div>            
+        </div>
+        <div class="row" style="display:none">  
+          <div class="col-sm-offset-4 col-sm-3">      
+            <table class="table" ng-show="!ccForm.ccCvc.$valid">
+              <tr>
+                <th>Valid</th>
+              </tr>
+              <tr>
+                <td>
+                  {{ccForm.ccCvc.$valid | yesNo}}
+                </td>
+              </tr>
+            </table>
+          </div>  
+        </div>
+        <div class="row">  
+          <div class="col-sm-offset-4 col-sm-6">                
+            <div class="form-group">
+              <label for="card-number">Expiry Date</label>
+              <div class="row" cc-exp>
+                <div class="col-xs-2">
+                  <input placeholder="MM" type="text" class="form-control" cc-exp-month name="ccExpMonth" ng-model="card.expiration.month">
+                </div>
+                <div class="col-xs-2">
+                  <input placeholder="YY" type="text" class="form-control" cc-exp-year name="ccExpYear" ng-model="card.expiration.year">
+                </div>
+                <div class="col-xs-1" ng-show="!ccForm.ccExpMonth.$valid || !ccForm.ccExpYear.$valid" >
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red"></span>
+                </div>
+                <div class="col-xs-1" ng-show="(ccForm.ccExpMonth.$valid && ccForm.ccExpYear.$valid) && (!ccForm.ccExpMonth.$pristine && !ccForm.ccExpYear.$pristine)" >
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:green"></span>
+                </div>
+              
+              </div>
+
+              <p ng-show="!ccForm.ccExpMonth.$valid || !ccForm.ccExpYear.$valid" style="color:red">
+                Invalid Date
+              </p>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-offset-4 col-sm-6">
+            <button type="submit" class="btn btn-success" ng-disabled="ccForm.$invalid">Submit</button>  
+            <button type="reset" class="btn btn-success">Reset</button>
+            <div id="dialog" title="Success" style="display:none">
+              <p>Your form is submitted successfully.</p>
+            </div>              
+        </div>    
+      
+      </form>
+    </div>
+  </body>
+
+</html>
