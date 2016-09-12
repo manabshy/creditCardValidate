@@ -1,30 +1,22 @@
 
-A set of Angular directives for constructing credit card payment forms. This uses the Luhn algorithm. Uses [creditcards](https://www.npmjs.org/package/creditcards) to parse and validate inputs. Pairs well with [angular-stripe](https://www.npmjs.org/package/angular-stripe) or any other payments backend. [Try it!](http://embed.plnkr.co/uE47aZ/preview)
+A set of Angular directives for constructing credit card payment forms. This uses the Luhn algorithm. Uses [creditcards](https://www.npmjs.org/package/creditcards) to parse and validate inputs. 
 
-## Installation
-```bash
-# use npm
-$ npm install angular-credit-cards
-# or bower
-$ bower install angular-credit-cards
-```
+## Run
+## All the dependencies are already installed. Just clone the repo and run the bellow command
 
-## Setup
+grunt server
 
-Include `'angular-credit-cards'` in your module's dependencies:
+## Integration
+*  Pass the Json object to the server via REST API
+*  Server Side Validation: It will be performed and a boolean flag True/False is returned
+*  Client Side Validation: Submit button will remain disabled untill user input correct values for Credit Card,CVC and Expiry Date
 
-```js
-// node module exports the string 'angular-credit-cards' for convenience
-angular.module('myApp', [
-  require('angular-credit-cards')
-]);
-// otherwise, include the code first then the module name
-angular.module('myApp', [
-  'credit-cards'
-]);
-```
+If you're not fully familiar with form validation in Angular, these may be helpful:
+* [Angular Documentation: Forms](https://docs.angularjs.org/guide/forms)
+* [Angular Form Validation (Scotch.io)](http://scotch.io/tutorials/javascript/angularjs-form-validation)
 
-If you'd like to use the [creditcards](https://www.npmjs.org/package/creditcards) API directly, you can inject the service as `creditcards`.
+angular-credit-cards sets validity keys that match the directive names (`ccNumber`, `ccCvc`, `ccExp`, `ccExpMonth`, `ccExpYear`). You can use these keys or the form css classes in order to display error messages.
+
 
 ## API
 
@@ -128,16 +120,6 @@ Validates that the month/year pair has not passed
 
 <hr>
 
-## Integration
-*  Pass the Json object to the server via REST API
-*  Server Side Validation: It will be performed and a boolean flag True/False is returned
-*  Client Side Validation: Submit button will remain disabled untill user input correct values for Credit Card,CVC and Expiry Date
-
-If you're not fully familiar with form validation in Angular, these may be helpful:
-* [Angular Documentation: Forms](https://docs.angularjs.org/guide/forms)
-* [Angular Form Validation (Scotch.io)](http://scotch.io/tutorials/javascript/angularjs-form-validation)
-
-angular-credit-cards sets validity keys that match the directive names (`ccNumber`, `ccCvc`, `ccExp`, `ccExpMonth`, `ccExpYear`). You can use these keys or the form css classes in order to display error messages.
 
 ## License
 
