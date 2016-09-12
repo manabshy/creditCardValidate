@@ -1,10 +1,16 @@
 
 A set of Angular directives for constructing credit card payment forms. This uses the Luhn algorithm. Uses [creditcards](https://www.npmjs.org/package/creditcards) to parse and validate inputs. 
 
-## Run
-## All the dependencies are already installed. Just clone the repo and run the bellow command
 
-grunt server
+## install
+
+ bower install 
+
+
+## All the other dependencies are already installed. Just clone the repo and run the bellow command
+
+ 
+ grunt server
 
 ## Integration
 *  Pass the Json object to the server via REST API
