@@ -1,7 +1,5 @@
-angular-credit-cards [![Build Status](https://travis-ci.org/bendrucker/angular-credit-cards.svg?branch=master)](https://travis-ci.org/bendrucker/angular-credit-cards)
-====================
 
-A set of Angular directives for constructing credit card payment forms. Uses [creditcards](https://www.npmjs.org/package/creditcards) to parse and validate inputs. Pairs well with [angular-stripe](https://www.npmjs.org/package/angular-stripe) or any other payments backend. [Try it!](http://embed.plnkr.co/uE47aZ/preview)
+A set of Angular directives for constructing credit card payment forms. This uses the Luhn algorithm. Uses [creditcards](https://www.npmjs.org/package/creditcards) to parse and validate inputs. Pairs well with [angular-stripe](https://www.npmjs.org/package/angular-stripe) or any other payments backend. [Try it!](http://embed.plnkr.co/uE47aZ/preview)
 
 ## Installation
 ```bash
@@ -35,7 +33,7 @@ With the exception of `ccExp`, all directives require `ngModel` on their element
 All directives apply a [numeric input pattern](http://bradfrostweb.com/blog/mobile/better-numerical-inputs-for-mobile-forms/) so that mobile browsers use a modified version of the enlarged telephone keypad. You should use `type="text"` for all `input` elements.
 
 <hr>
-
+### check that the card number is valid according to the Luhn algorithm
 ### Card Number (`cc-number`)
 
 ```html
@@ -131,15 +129,15 @@ Validates that the month/year pair has not passed
 <hr>
 
 ## Integration
+*  Pass the Json object to the server via REST API
+*  Server Side Validation: It will be performed and a boolean flag True/False is returned
+*  Client Side Validation: Submit button will remain disabled untill user input correct values for Credit Card,CVC and Expiry Date
 
 If you're not fully familiar with form validation in Angular, these may be helpful:
 * [Angular Documentation: Forms](https://docs.angularjs.org/guide/forms)
 * [Angular Form Validation (Scotch.io)](http://scotch.io/tutorials/javascript/angularjs-form-validation)
-* [Form validation with AngularJS (ng-newsletter)](http://www.ng-newsletter.com/posts/validations.html)
 
 angular-credit-cards sets validity keys that match the directive names (`ccNumber`, `ccCvc`, `ccExp`, `ccExpMonth`, `ccExpYear`). You can use these keys or the form css classes in order to display error messages.
-
-You can also try a [live demo](http://embed.plnkr.co/uE47aZ/preview) and experiment with various inputs and see how they're validated.
 
 ## License
 
